@@ -12,6 +12,54 @@
     rel="stylesheet">
 
 </head>
+
+<script language="JavaScript">
+  //create array that will hold all ordered products
+  var shoppingCart = [];
+
+  //this function manipulates DOM and displays content of our shopping cart
+  function displayShoppingCart() {
+    var orderedProductsTblBody = document.getElementById("orderedProductsTblBody");
+    //ensure we delete all previously added rows from ordered products table
+    while (orderedProductsTblBody.rows.length > 0) {
+      orderedProductsTblBody.deleteRow(0);
+    }
+
+    //variable to hold total price of shopping cart
+    var cart_total_price = 0;
+    //iterate over array of objects
+    for (var product in shoppingCart) {
+      //add new row      
+      var row = orderedProductsTblBody.insertRow();
+      //create three cells for product properties 
+      var cellName = row.insertCell(0);
+      var cellDescription = row.insertCell(1);
+      var cellPrice = row.insertCell(2);
+      cellPrice.align = "right";
+      //fill cells with values from current product object of our array
+      cellName.innerHTML = shoppingCart[product].Name;
+      cellDescription.innerHTML = shoppingCart[product].Description;
+      cellPrice.innerHTML = shoppingCart[product].Price;
+      cart_total_price += shoppingCart[product].Price;
+    }
+    //fill total cost of our shopping cart 
+    document.getElementById("cart_total").innerHTML = cart_total_price;
+  }
+
+  function AddtoCart(name, description, price) {
+    //Below we create JavaScript Object that will hold three properties you have mentioned:    Name,Description and Price
+    var singleProduct = {};
+    //Fill the product object with data
+    singleProduct.Name = name;
+    singleProduct.Description = description;
+    singleProduct.Price = price;
+    //Add newly created product to our shopping cart 
+    shoppingCart.push(singleProduct);
+    //call display function to show on screen
+    displayShoppingCart();
+  }
+</script>
+
 <style>
   h1 {
     font-size: 50px;
@@ -32,6 +80,15 @@
 
   h3 {
     font-family: 'Roboto', sans-serif;
+  }
+
+  table.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  section {
+    text-align: center;
   }
 
   h6 {
@@ -138,8 +195,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Beats Solo3 wireless headphones (Silver Grey Edition)</h4>
         <p id="demo">S$88.88</p>
-        <button type="button" onclick='document.getElementById("demo").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Beats',88.88)" />
       </div>
     </div>
     <div class="flex-item">
@@ -149,8 +205,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Beats Solo3 wireless headphones (Red Edition)</h4>
         <p id="demo1">S$88.88</p>
-        <button type="button" onclick='document.getElementById("demo1").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Beats',88.88)" />
       </div>
     </div>
     <div class="flex-item">
@@ -161,8 +216,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Razer ManO'War Wireless Headset</h4>
         <p id="demo2">S$88.88</p>
-        <button type="button" onclick='document.getElementById("demo2").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Razer',88.88)" />
       </div>
     </div>
     <div class="flex-item">
@@ -173,8 +227,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Razer BlackShark V2 X Wired Gaming Headset</h4>
         <p id="demo3">S$88.88</p>
-        <button type="button" onclick='document.getElementById("demo3").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Razer',88.88)" />
       </div>
     </div>
   </section>
@@ -192,8 +245,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony WH-XB910N Wireless Headphones</h4>
         <p id="demo4">S$275.00</p>
-        <button type="button" onclick='document.getElementById("demo4").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',275.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -203,8 +255,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony MDR-ZX330BT Wireless Headphones</h4>
         <p id="demo5">S$129.00</p>
-        <button type="button" onclick='document.getElementById("demo5").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',129.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -214,8 +265,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony WH-CH520 Wireless Headphones</h4>
         <p id="demo6">S$139.00</p>
-        <button type="button" onclick='document.getElementById("demo6").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',139.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -225,8 +275,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony ZX110NC Noise Cancelling Headphones</h4>
         <p id="demo7">S$70.00</p>
-        <button type="button" onclick='document.getElementById("demo7").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',70.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -236,8 +285,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony WH-CH710N Wireless Noise Cancelling Headphone</h4>
         <p id="demo8">S$252.00</p>
-        <button type="button" onclick='document.getElementById("demo8").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',252.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -247,8 +295,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony MDR-1AM2 Headphones</h4>
         <p id="demo9">S$434.00</p>
-        <button type="button" onclick='document.getElementById("demo9").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',434.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -258,8 +305,7 @@
       <div class="flex-info">
         <h4 style="font-weight:200;">Sony WH-1000XM4 Wireless Noise Cancelling Headphones</h4>
         <p id="demo10">S$509.00</p>
-        <button type="button" onclick='document.getElementById("demo10").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',509.00)" />
       </div>
     </div>
     <div class="flex-item">
@@ -270,14 +316,44 @@
         <h4 style="font-weight:200;">Sony
           WH-1000XM5 Wireless Noise Cancelling Headphones</h4>
         <p id="demo11">S$589.00</p>
-        <button type="button" onclick='document.getElementById("demo11").innerHTML = "Added successfully"'>Add to
-          cart</button>
+        <input type="button" value="Add to cart" onclick="AddtoCart('Headphone','Sony',589.00)" />
       </div>
     </div>
   </section>
 
   <hr style="width: 60%;">
+  <h1>Checkout</h1>
+  <section class="center" id="demo13">
+    <table class="center" cellpadding="4" cellspacing="4" border="1" id="orderedProductsTbl">
+      <thead>
+        <tr>
+          <td>
+            Name
+          </td>
+          <td>
+            Description
+          </td>
+          <td>
+            Price
+          </td>
+        </tr>
+      </thead>
+      <tbody id="orderedProductsTblBody">
 
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" align="right" id="cart_total">
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <button type="button"
+      onclick='document.getElementById("demo13").innerHTML = "Thank you for shopping with us!"'>Checkout</button>
+  </section>
+
+
+  <hr style="width: 60%;">
   <h1 id="contact">Contact Us</h1>
 
   <form id="demo12">
